@@ -40,6 +40,10 @@ public class OutboxPoller {
             kafkaTemplate.send(topicoPara(evento.getEventType()), evento.getAggregateId().toString(), evento.getPayload())
                     .get(5, TimeUnit.SECONDS);
             evento.marcarComoProcessado(Instant.now());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            log.warn("Falha ao publicar evento outbox {}: {}", evento.getId(), e.getMessage());
+            evento.registrarTentativaFalha();
         } catch (Exception e) {
             log.warn("Falha ao publicar evento outbox {}: {}", evento.getId(), e.getMessage());
             evento.registrarTentativaFalha();
