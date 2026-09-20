@@ -25,3 +25,5 @@ replay_pid*
 
 # Superpowers subagent-driven-development scratch workspace
 .superpowers/
+
+target/
