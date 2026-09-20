@@ -53,7 +53,9 @@ módulos/serviços, deploy em produção.
 - `aggregate_id` (UUID do agregado, ex: id do usuário)
 - `event_type` (ex: `"UsuarioCadastrado"`)
 - `payload` (`jsonb`) — corpo do evento serializado
-- `status` (`PENDING`, `PROCESSED`, `FAILED`)
+- `status` (`PENDING`, `PROCESSED`) — apenas dois estados nesta POC; não há
+  transição automática para um estado terminal de falha (ver "Tratamento de
+  erros")
 - `created_at`
 - `processed_at` (nullable)
 - `attempts` (int, default 0)
